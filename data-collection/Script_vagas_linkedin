@@ -1,0 +1,24 @@
+# coding: utf-8
+from time import sleep
+from selenium import webdriver
+
+driver = webdriver.Chrome(executable_path='C:/Users/Gustavo/chromedriver.exe')
+driver.get('https://www.google.com')
+
+urllk = 'https://www.linkedin.com/jobs/search/?currentJobId=1949216399&keywords=ci%C3%AAncia%20de%20dados&originalSubdomain=br'
+driver.get(urllk)
+
+card = driver.find_element_by_class_name('result-card')
+card.click()
+
+botao = driver.find_element_by_class_name('show-more-less-html__button')
+botao.click()
+
+# sleep(2)
+descricao = driver.find_element_by_class_name('description')
+
+print(descricao.text)
+
+with open('C:/Users/Gustavo/Desktop/linkedin_vaga.txt','w') as file:
+    file.write(descricao.text)
+driver.close()
